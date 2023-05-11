@@ -1,0 +1,3 @@
+[submodule "dashboard_module_skeleton"]
+	path = dashboard_module_skeleton
+	url = https://github.com/Respawnsive/dashboard_module_skeleton.git
