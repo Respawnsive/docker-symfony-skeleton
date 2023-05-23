@@ -30,11 +30,11 @@ services:
 ###> doctrine/doctrine-bundle ###
   database:
     ports:
-      - "3306"
+      - "127.0.0.1:3306:3306"
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###
   mailer:
     image: schickling/mailcatcher
-    ports: ["1025", "1080"]
+    ports: ["1025", "127.0.0.1:1080:1080"]
 ###< symfony/mailer ###
