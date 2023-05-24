@@ -2,16 +2,48 @@
 
 Based on Symfony Docker by [Dunglas](https://github.com/dunglas/symfony-docker/)
 
-## Requirement
-   * Docker (Docker Desktop on Windows)
-   * Make (Wsl or Choco) 
+## Requirement (Windows)
 
-   https://chocolatey.org/install
-   "choco install make"
-   
+   * WSL
+   * Docker (Docker Desktop on Windows, windows only)
+   * Make (Wsl) 
+   * Git
+
+   ## Install WSL :
+    (cmd admin mode) : wsl --install Debian
+     => Reboot
+    
+   ## Install Docker Desktop 
+    https://docs.docker.com/desktop/windows/wsl/
+     => Reboot
+    
+   ## ~~Install chocolatey~~ (No, it doesn't work.)
+    https://chocolatey.org/install 
+    Execute in cmd (with privileges admin !) : 
+       @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+    
+   * ~~Then : "choco install make"~~ 
+   * ~~Then : "choco install git"~~
+
+## Requirement (Linux Only)
+   * Make
+   * Docker (Not Docker Desktop)
+   * Git
+
+## Clone
+    
+git clone https://github.com/Respawnsive/dashboard.git
+
+Or 
+
+Use PhpStorm
+
 ## Getting Started
 
-1. in terminal : make up (need to install Make)
+// First Clone the repo ! (PhpStorm or Git Clone)
+
+1. (Linux) in terminal ( in wsl ) : make up (need to install Make)
+1. (Windows) : docker-compose up -d
 2. open browser => https://localhost
 3. mail info => http://localhost:1080/
 4. sql info => 127.0.0.1 , port 3306 , => user : root => !ChangeMeRootPassword! => database : main
@@ -19,6 +51,9 @@ Based on Symfony Docker by [Dunglas](https://github.com/dunglas/symfony-docker/)
 
 ## Use SF command
 
-Example : 
+Example (Linux) : 
    * in terminal : 
         make sf c=make:entity
+Example (Windows) :
+   * go in php container :
+        php bin/console make:entity

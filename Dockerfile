@@ -4,18 +4,12 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
-# Builder images
-FROM composer/composer:2-bin AS composer
-
-FROM mlocati/php-extension-installer:latest AS php_extension_installer
-
 # Build Caddy with the Mercure and Vulcain modules
+# Temporary fix for https://github.com/dunglas/mercure/issues/770
 FROM caddy:2.7-builder-alpine AS app_caddy_builder
 
-RUN xcaddy build \
-	--with github.com/dunglas/mercure \
+RUN xcaddy build v2.6.4 \
 	--with github.com/dunglas/mercure/caddy \
-	--with github.com/dunglas/vulcain \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
@@ -34,16 +28,16 @@ ENV APP_ENV=prod
 WORKDIR /srv/app
 
 # php extensions installer: https://github.com/mlocati/docker-php-extension-installer
-COPY --from=php_extension_installer --link /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=mlocati/php-extension-installer:latest --link /usr/bin/install-php-extensions /usr/local/bin/
 
 # persistent / runtime deps
+# hadolint ignore=DL3018
 RUN apk add --no-cache \
 		acl \
 		fcgi \
 		file \
 		gettext \
 		git \
-    	make \
 	;
 
 RUN set -eux; \
@@ -52,16 +46,10 @@ RUN set -eux; \
 		intl \
 		opcache \
 		zip \
-    	pdo_mysql \
+        pdo_mysql \
     ;
 
 ###> recipes ###
-###> doctrine/doctrine-bundle ###
-RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
-	docker-php-ext-install -j"$(nproc)" pdo_pgsql; \
-	apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5; \
-	apk del .pgsql-deps
-###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -86,7 +74,7 @@ CMD ["php-fpm"]
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-COPY --from=composer --link /composer /usr/bin/composer
+COPY --from=composer/composer:2-bin --link /composer /usr/bin/composer
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY --link composer.* symfony.* ./
@@ -129,7 +117,7 @@ RUN set -eux; \
 RUN rm -f .env.local.php
 
 # Caddy image
-FROM caddy:2.6-alpine AS app_caddy
+FROM caddy:2-alpine AS app_caddy
 
 WORKDIR /srv/app
 
