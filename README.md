@@ -54,6 +54,8 @@ Use PhpStorm
 Example (Linux) : 
    * in terminal : 
         make sf c=make:entity
+        
+        
 Example (Windows) :
    * go in php container :
         php bin/console make:entity
