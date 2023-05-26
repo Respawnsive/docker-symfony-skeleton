@@ -59,3 +59,12 @@ Example (Linux) :
 Example (Windows) :
    * go in php container :
         php bin/console make:entity
+
+
+## Env vars
+
+=> Test env
+
+docker compose down ; MARIADB_USER="userTest" MARIADB_PASSWORD="test" MARIADB_DATABASE="main_test" docker compose up -d
+
+make test

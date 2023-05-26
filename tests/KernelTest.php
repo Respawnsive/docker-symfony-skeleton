@@ -38,6 +38,7 @@ class KernelTest extends KernelTestCase
         catch(\Doctrine\DBAL\Exception $ex)
         {
 
+            var_dump($ex->getMessage());
         }
 
         $this->assertTrue($dbal->isConnected()) ;
