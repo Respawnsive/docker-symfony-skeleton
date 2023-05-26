@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class KernelTest extends KernelTestCase
 {
-    public function testKernel(): void
+    public function testKernelBoot(): void
     {
         // (1) boot the Symfony kernel
         self::bootKernel();
@@ -37,10 +37,12 @@ class KernelTest extends KernelTestCase
         }
         catch(\Doctrine\DBAL\Exception $ex)
         {
-
-            var_dump($ex->getMessage());
+            dump($ex->getMessage());
         }
 
         $this->assertTrue($dbal->isConnected()) ;
     }
+
+
+
 }

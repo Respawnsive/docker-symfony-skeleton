@@ -68,3 +68,7 @@ Example (Windows) :
 docker compose down ; MARIADB_USER="userTest" MARIADB_PASSWORD="test" MARIADB_DATABASE="main_test" docker compose up -d
 
 make test
+
+=> Execute cmd with docker :
+
+docker compose exec php bin/console

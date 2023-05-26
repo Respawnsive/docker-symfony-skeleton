@@ -11,7 +11,7 @@ SYMFONY  = $(PHP_CONT) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc
+.PHONY        : help build up start down logs sh composer vendor sf cc migrate fixture test testAll
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -52,5 +52,17 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
-test: ## Launch Tests
+
+## —— Unit Tests 🎵 ———————————————————————————————————————————————————————————————
+migrate: c='doctrine:migrations:migrate' --env=test --no-interaction
+migrate: sf
+fixture: c='doctrine:fixtures:load' --env=test --no-interaction
+fixture: sf
+
+test: ## composer test
 	@$(COMPOSER) test
+
+phpunitDetail: ## Launch Tests Details
+	@$(COMPOSER) testDetail
+
+testAll: | migrate fixture test #Tests
