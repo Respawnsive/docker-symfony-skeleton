@@ -54,9 +54,12 @@ cc: sf
 
 
 ## —— Unit Tests 🎵 ———————————————————————————————————————————————————————————————
-migrate: c='doctrine:migrations:migrate' --env=test --no-interaction
+colon := :
+$(colon) := :
+
+migrate: c='doctrine$(:)migrations$(:)migrate' --env=test --no-interaction
 migrate: sf
-fixture: c='doctrine:fixtures:load' --env=test --no-interaction
+fixture: c='doctrine$(:)fixtures$(:)load' --env=test --no-interaction
 fixture: sf
 
 test: ## composer test
