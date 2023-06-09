@@ -5,11 +5,15 @@ DOCKER_COMP = docker compose
 
 # Docker containers
 PHP_CONT = $(DOCKER_COMP) exec php
+NODE_CONT = $(DOCKER_COMP) exec node
+
 
 # Executables
 PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
+NPM		 = $(NODE_CONT) npm
+YARN	 = $(NODE_CONT) yarn
 
 # Misc
 .DEFAULT_GOAL = help
@@ -54,8 +58,25 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
+## —— Yarn / Npm / Webpack ❤❤❤ ———————————————————————————————————————————————————————————————
+yarn: ## Run yarn, pass the parameter "c=" to run a given command, example: make composer c='yarn add package'
+	@$(eval c ?=)
+	@$(YARN) $(c)
 
-## —— Unit Tests 🎵 ———————————————————————————————————————————————————————————————
+npm: ## Run npm, pass the parameter "c=" to run a given command, example: make composer c='npm add package'
+	@$(eval c ?=)
+	@$(NPM) $(c)
+
+yarn/install: ## Run Yarn Install
+yarn/install: c=install
+yarn/install: yarn
+
+yarn/build: ## Run Yarn Build
+yarn/build: c=build
+yarn/build: yarn
+
+
+## —— Unit Tests 🔥❤  ———————————————————————————————————————————————————————————————
 colon := :
 $(colon) := :
 
