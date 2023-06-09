@@ -64,11 +64,11 @@ fixture: c='doctrine$(:)fixtures$(:)load' --env=test --no-interaction
 fixture: sf
 
 test: ## composer test
-	@$(MAKE) migrate
-	@$(MAKE) fixture
+	@$(MAKE) migrate || true
+	@$(MAKE) fixture || true
 	@$(COMPOSER) test
 
 testDetail: ## Launch Tests Details
-	@$(MAKE) migrate
-	@$(MAKE) fixture
+	@$(MAKE) migrate || true
+	@$(MAKE) fixture || true
 	@$(COMPOSER) testDetail
