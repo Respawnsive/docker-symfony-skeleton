@@ -1,3 +1,5 @@
+# export BUILDKIT_PROGRESS=plain << debug
+
 # Executables (local)
 DOCKER_COMP = docker compose
 

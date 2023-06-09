@@ -6,14 +6,19 @@
 
 # Build Caddy with the Mercure and Vulcain modules
 # Temporary fix for https://github.com/dunglas/mercure/issues/770
-FROM caddy:2.7-builder-alpine AS app_caddy_builder
+
+ARG PHP_VERSION=8.2
+ARG CADDY_VERSION=2.7
+ARG NODE_VERSION=19
+
+FROM caddy:${CADDY_VERSION}-builder-alpine AS app_caddy_builder
 
 RUN xcaddy build v2.6.4 \
 	--with github.com/dunglas/mercure/caddy \
 	--with github.com/dunglas/vulcain/caddy
 
 # Prod image
-FROM php:8.2-fpm-alpine AS app_php
+FROM php:${PHP_VERSION}-fpm-alpine AS app_composer
 
 # Allow to use development versions of Symfony
 ARG STABILITY="stable"
@@ -97,6 +102,24 @@ RUN set -eux; \
 		chmod +x bin/console; sync; \
     fi
 
+# node "stage"
+FROM node:${NODE_VERSION}-alpine AS symfony_node
+
+COPY --link --from=app_composer /srv/app /app/
+COPY --link package.* /app/
+WORKDIR /app
+
+RUN yarn add --dev webpack webpack-cli webpack-notifier@^1.15.0 core-js @hotwired/stimulus @babel/core babel-loader @babel/preset-env node-sass css-loader sass-loader style-loader postcss-loader autoprefixer @symfony/webpack-encore
+
+RUN yarn install --force
+RUN yarn run build
+
+
+## If you are building your code for production
+# RUN npm ci --only=production
+FROM app_composer AS app_php
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
+
 # Dev image
 FROM app_php AS app_php_dev
 
@@ -117,10 +140,11 @@ RUN set -eux; \
 RUN rm -f .env.local.php
 
 # Caddy image
-FROM caddy:2-alpine AS app_caddy
+FROM caddy:${CADDY_VERSION}-alpine AS app_caddy
 
 WORKDIR /srv/app
 
 COPY --from=app_caddy_builder --link /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php --link /srv/app/public public/
 COPY --link docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=symfony_node --link /app/public/build /srv/app/public/build/
