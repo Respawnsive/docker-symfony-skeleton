@@ -88,7 +88,7 @@ docker compose exec php bin/console
 If the route is not up to date => restart the container "node"
 
 ## Xdebug
-  ** TODO
+  ** [WIP]
 
 ## Github update from Template
  ==> https://stackoverflow.com/questions/56577184/github-pull-changes-from-a-template-repository
