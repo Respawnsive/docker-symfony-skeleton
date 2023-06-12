@@ -30,11 +30,14 @@ Based on Symfony Docker by [Dunglas](https://github.com/dunglas/symfony-docker/)
    * Docker (Not Docker Desktop)
    * Git
 
-## Clone
-    
-git clone https://github.com/Respawnsive/dashboard.git
+## Create Repository from Template (if the repo doesnt exist)
+    Use button "Use this template" from https://github.com/RespawnsiveWeb/skeletonSF 
 
-Or 
+## Git Clone
+
+git clone [URI.git]
+
+Or
 
 Use PhpStorm
 
@@ -86,3 +89,9 @@ If the route is not up to date => restart the container "node"
 
 ## Xdebug
   ** TODO
+
+
+## Github update from Template
+
+ ==> https://stackoverflow.com/questions/56577184/github-pull-changes-from-a-template-repository
+
