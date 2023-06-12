@@ -1,4 +1,5 @@
 # export BUILDKIT_PROGRESS=plain << debug
+# docker compose build
 
 # Executables (local)
 DOCKER_COMP = docker compose
@@ -25,7 +26,7 @@ help: ## Outputs this help screen
 
 ## —— Docker 🐳 ————————————————————————————————————————————————————————————————
 build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
+	sudo rm -rf node_modules/ ; $(DOCKER_COMP) build --pull --no-cache
 
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach

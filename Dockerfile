@@ -109,8 +109,7 @@ COPY --link --from=app_composer /srv/app /app/
 COPY --link package.* /app/
 WORKDIR /app
 
-
-RUN yarn add --dev webpack webpack-cli webpack-notifier@^1.15.0 core-js @hotwired/stimulus @babel/core babel-loader @babel/preset-env node-sass css-loader sass-loader style-loader postcss-loader autoprefixer @symfony/webpack-encore
+RUN yarn add --dev @babel/plugin-proposal-class-properties file-loader@^6.0.0 copy-webpack-plugin sass-loader@^12.0.0 sass webpack webpack-cli webpack-notifier@^1.15.0 core-js @hotwired/stimulus @babel/core babel-loader @babel/preset-env node-sass css-loader sass-loader style-loader postcss-loader autoprefixer @symfony/webpack-encore
 RUN yarn install --force
 RUN yarn run build
 

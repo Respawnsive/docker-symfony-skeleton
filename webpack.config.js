@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -13,6 +14,16 @@ Encore
     .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
+    .copyFiles({
+      from: './assets/images',
+      to: 'images/[path][name].[hash:8].[ext]'
+    })
+    .addPlugin(new CopyWebpackPlugin({
+      patterns: [
+        {from: './assets/fonts', to: 'fonts'},
+        // {from: './assets/public/lang', to: 'lang'}
+      ]
+    }))
 
     /*
      * ENTRY CONFIG
@@ -56,9 +67,24 @@ Encore
         config.corejs = '3.23';
     })
 
-    // enables Sass/SCSS support
-    //.enableSassLoader()
+    .configureBabel((config) => {
+      config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
 
+    // enables @babel/preset-env polyfills
+    .configureBabelPresetEnv((config) => {
+      config.useBuiltIns = 'usage';
+      config.corejs = 3;
+    })
+
+    // enable LESS
+    .enableLessLoader()
+    // enables Sass/SCSS support
+    .enableSassLoader()
+    .addRule({
+      test: /public\/lang\/.*\.json$/,
+      type: 'asset/resource'
+    })
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
@@ -70,7 +96,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();

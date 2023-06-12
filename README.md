@@ -44,7 +44,7 @@ Use PhpStorm
 
 1. (Linux) in terminal ( in wsl ) : make up (need to install Make)
 1. (Windows) : docker-compose up -d
-2. open browser => https://localhost
+2. open browser => https://localhost => if CSS/Js doesn't load => show source code of page => Then click https://localhost:8080/build/runtime.js , and accept certificate !
 3. mail info => http://localhost:1080/
 4. sql info => 127.0.0.1 , port 3306 , => user : root => !ChangeMeRootPassword! => database : main
 
@@ -72,3 +72,6 @@ make test
 => Execute cmd with docker :
 
 docker compose exec php bin/console
+
+## Add Yarn module
+    * go in container "node" => Yarn add --dev Module
