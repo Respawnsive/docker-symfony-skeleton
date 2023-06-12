@@ -81,3 +81,5 @@ docker compose exec php bin/console
 ## Routing system 
     => https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/installation.rst (already installed)
     => https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/usage.rst
+
+If the route is not up to date => restart the container "node"
