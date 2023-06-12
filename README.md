@@ -83,3 +83,6 @@ docker compose exec php bin/console
     => https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/usage.rst
 
 If the route is not up to date => restart the container "node"
+
+## Xdebug
+  ** TODO
