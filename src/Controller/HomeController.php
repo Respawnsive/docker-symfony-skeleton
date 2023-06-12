@@ -17,4 +17,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ];
     }
+
+    #[Route('/ajax.php', name: 'ajax_test', options: ['expose' => true])]
+    public function ajax(): array
+    {
+        return [
+            'controller_name' => 'AjaxController',
+        ];
+    }
+
 }

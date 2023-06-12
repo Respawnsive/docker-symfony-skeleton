@@ -6,6 +6,8 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 if (!Encore.isRuntimeEnvironmentConfigured()) {
     Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
+const FosRouting = require('fos-router/webpack/FosRouting');
+//...
 
 Encore
     // directory where compiled assets will be stored
@@ -97,6 +99,7 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
+    .addPlugin(new FosRouting())
 ;
 
 module.exports = Encore.getWebpackConfig();

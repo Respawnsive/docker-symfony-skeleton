@@ -42,6 +42,8 @@ Use PhpStorm
 
 // First Clone the repo ! (PhpStorm or Git Clone)
 
+=> chrome://flags/#allow-insecure-localhost <<< you can ignore certificate error on chrome ;
+
 1. (Linux) in terminal ( in wsl ) : make up (need to install Make)
 1. (Windows) : docker-compose up -d
 2. open browser => https://localhost => if CSS/Js doesn't load => show source code of page => Then click https://localhost:8080/build/runtime.js , and accept certificate !
@@ -75,3 +77,7 @@ docker compose exec php bin/console
 
 ## Add Yarn module
     * go in container "node" => Yarn add --dev Module
+
+## Routing system 
+    => https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/installation.rst (already installed)
+    => https://github.com/FriendsOfSymfony/FOSJsRoutingBundle/blob/master/Resources/doc/usage.rst

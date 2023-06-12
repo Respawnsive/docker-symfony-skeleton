@@ -10,7 +10,14 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+import Routing from "fos-router";
 
+/*
+const routes = require('../../public/js/fos_js_routes.json');
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+Routing.setRoutingData(routes);
+Routing.generate('rep_log_list');
+*/
 
 require ('@popperjs/core')
 require ('tooltip');
@@ -22,4 +29,5 @@ require('bootstrap');
 
 $(function () {
   $('[data-toggle="popover"]').popover()
+  console.log("An example of routing JS : " + Routing.generate('ajax_test', /* your params */));
 })
