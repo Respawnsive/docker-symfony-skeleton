@@ -106,13 +106,13 @@ RUN set -eux; \
 FROM node:${NODE_VERSION}-alpine AS symfony_node
 
 COPY --link --from=app_composer /srv/app /app/
-RUN apk add  --no-cache \
-    php${PHP_VERSION}-cli \
-    php${PHP_VERSION}-mbstring \
-    php${PHP_VERSION}-tokenizer \
-    php${PHP_VERSION}-dom \
-    php${PHP_VERSION}-ctype \
-    php${PHP_VERSION}-session \
+RUN apk add --no-cache \
+    "php${PHP_VERSION}-cli" \
+    "php${PHP_VERSION}-mbstring" \
+    "php${PHP_VERSION}-tokenizer" \
+    "php${PHP_VERSION}-dom" \
+    "php${PHP_VERSION}-ctype" \
+    "php${PHP_VERSION}-session" \
     ;
 
 COPY --link package.* /app/
