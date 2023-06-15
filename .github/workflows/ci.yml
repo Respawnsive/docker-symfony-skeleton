@@ -49,3 +49,21 @@ jobs:
                 registry: docker.respawnsive.net
                 username: respawnsive
                 password: ***REMOVED***
+            - name: Push Php To PrivateRegistry
+              id: push-to-docker-private
+              uses: redhat-actions/push-to-registry@v2
+              with:
+                image: skeletonsf-php
+                tags: latest
+                registry: docker.respawnsive.net
+                username: respawnsive
+                password: ***REMOVED***
+            - name: Push node To PrivateRegistry
+              id: push-to-docker-private
+              uses: redhat-actions/push-to-registry@v2
+              with:
+                image: skeletonsf-node
+                tags: latest
+                registry: docker.respawnsive.net
+                username: respawnsive
+                password: ***REMOVED***
