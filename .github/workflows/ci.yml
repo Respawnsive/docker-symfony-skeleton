@@ -28,7 +28,7 @@ jobs:
               id: push-to-docker-private1
               uses: redhat-actions/push-to-registry@v2
               with:
-                image: skeletonsf-caddy
+                image: docker.respawnsive.net/skeletonsf-caddy
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
@@ -37,7 +37,7 @@ jobs:
               id: push-to-docker-private2
               uses: redhat-actions/push-to-registry@v2
               with:
-                image: skeletonsf-php
+                image: docker.respawnsive.net/skeletonsf-php
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
@@ -46,7 +46,7 @@ jobs:
               id: push-to-docker-private3
               uses: redhat-actions/push-to-registry@v2
               with:
-                image: skeletonsf-node
+                image: docker.respawnsive.net/skeletonsf-node
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
