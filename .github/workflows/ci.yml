@@ -48,4 +48,4 @@ jobs:
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
-                password: ${{ secrets.REGISTRY_PASSWORD }}
+                password: ***REMOVED***
