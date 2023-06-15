@@ -41,7 +41,7 @@ jobs:
             - name: Run PHP UNIT
               run: make test
             - name: Push Caddy To PrivateRegistry
-              id: push-to-docker-private
+              id: push-to-docker-private1
               uses: redhat-actions/push-to-registry@v2
               with:
                 image: skeletonsf-caddy
@@ -50,7 +50,7 @@ jobs:
                 username: respawnsive
                 password: ***REMOVED***
             - name: Push Php To PrivateRegistry
-              id: push-to-docker-private
+              id: push-to-docker-private2
               uses: redhat-actions/push-to-registry@v2
               with:
                 image: skeletonsf-php
@@ -59,7 +59,7 @@ jobs:
                 username: respawnsive
                 password: ***REMOVED***
             - name: Push node To PrivateRegistry
-              id: push-to-docker-private
+              id: push-to-docker-private3
               uses: redhat-actions/push-to-registry@v2
               with:
                 image: skeletonsf-node
