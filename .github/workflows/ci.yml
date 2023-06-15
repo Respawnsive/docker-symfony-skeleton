@@ -22,24 +22,8 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: Start services
-              run: make up
-            - name: Wait for services
-              run: |
-                  while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
-                    case $status in
-                      starting) sleep 1;;
-                      healthy) exit 0;;
-                      unhealthy) exit 1;;
-                    esac
-                  done
-                  exit 1
-            - name: Check HTTP reachability
-              run: curl http://localhost
-            - name: Check HTTPS reachability
-              run: curl -k https://localhost
-            - name: Run PHP UNIT
-              run: make test
+            - name: Build image
+              run: make build
             - name: Push Caddy To PrivateRegistry
               id: push-to-docker-private1
               uses: redhat-actions/push-to-registry@v2
@@ -67,3 +51,21 @@ jobs:
                 registry: docker.respawnsive.net
                 username: respawnsive
                 password: ***REMOVED***
+            - name: Up containers
+              run: make up                
+            - name: Wait for services
+              run: |
+                while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker compose ps -q php)")"; do
+                  case $status in
+                    starting) sleep 1;;
+                    healthy) exit 0;;
+                    unhealthy) exit 1;;
+                  esac
+                done
+                exit 1
+            - name: Check HTTP reachability
+              run: curl http://localhost
+            - name: Check HTTPS reachability
+              run: curl -k https://localhost
+            - name: Run PHP UNIT
+              run: make test
