@@ -3,6 +3,7 @@ version: "3.4"
 # Development environment override
 services:
   php:
+    image: docker.respawnsive.net/skeletonsf-php
     build:
       target: app_php_dev
     volumes:
@@ -19,6 +20,7 @@ services:
       - host.docker.internal:host-gateway
   
   node:
+    image: docker.respawnsive.net/skeletonsf-node
     build:
       context: .
       target: symfony_node

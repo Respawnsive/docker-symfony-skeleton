@@ -2,6 +2,7 @@ version: "3.4"
 
 services:
   php:
+    image: docker.respawnsive.net/skeletonsf-php
     build:
       context: .
       target: app_php
@@ -26,6 +27,7 @@ services:
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
 
   caddy:
+    image: docker.respawnsive.net/skeletonsf-caddy
     build:
       context: .
       target: app_caddy

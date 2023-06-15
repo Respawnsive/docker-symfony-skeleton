@@ -69,3 +69,4 @@ jobs:
               run: curl -k https://localhost
             - name: Run PHP UNIT
               run: make test
+
