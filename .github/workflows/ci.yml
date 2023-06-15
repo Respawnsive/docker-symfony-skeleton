@@ -40,3 +40,12 @@ jobs:
               run: curl -k https://localhost
             - name: Run PHP UNIT
               run: make test
+            - name: Push Caddy To PrivateRegistry
+              id: push-to-docker-private
+              uses: redhat-actions/push-to-registry@v2
+              with:
+                image: skeletonsf-caddy
+                tags: latest
+                registry: docker.respawnsive.net
+                username: respawnsive
+                password: ${{ secrets.REGISTRY_PASSWORD }}
