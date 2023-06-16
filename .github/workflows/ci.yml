@@ -34,7 +34,7 @@ jobs:
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
-                password: ***REMOVED***
+                password: xxxxxxxx
             - name: Push Php To PrivateRegistry
               id: push-to-docker-private2
               uses: redhat-actions/push-to-registry@v2
@@ -43,7 +43,7 @@ jobs:
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
-                password: ***REMOVED***
+                password: xxxxxxxx
             - name: Push node To PrivateRegistry
               id: push-to-docker-private3
               uses: redhat-actions/push-to-registry@v2
@@ -52,7 +52,7 @@ jobs:
                 tags: latest
                 registry: docker.respawnsive.net
                 username: respawnsive
-                password: ***REMOVED***
+                password: xxxxxxxx
             - name: Up containers
               run: make down
             - name: Up containers
