@@ -31,7 +31,7 @@ Based on Symfony Docker by [Dunglas](https://github.com/dunglas/symfony-docker/)
    * Git
 
 ## Create Repository from Template (if the repo doesnt exist)
-    Use button "Use this template" from https://github.com/***REMOVED***skeletonSF 
+    Use button "Use this template" from https://github.com/Respawnsive/docker-symfony-skeleton 
 
 ## Git Clone
 
