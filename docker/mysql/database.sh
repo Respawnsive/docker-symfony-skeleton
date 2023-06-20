@@ -1,3 +1,4 @@
+# attention droit chmod important , chmod 644 database.sh
 mysql_note "$0: running $f";
 
 echo "
